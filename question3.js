@@ -1,14 +1,45 @@
-function primenumber(number){
-    if(number === 1  || number === 3|| number === 5|| number === 7|| number === 9) {
-        return true;
-    } else {
-        return false;
+
+
+const readline = require('readline');
+
+// Create interface to read input from user
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+// Function to filter prime numbers based on user input
+function filterPrimes() {
+    rl.question('Enter numbers separated by spaces: ', input => {
+        const numbers = input.split(' ').map(num => parseInt(num));
+        const primeNumbers = filterPrimeNumbers(numbers);
+        console.log('Prime numbers:', primeNumbers);
+        rl.close();
+    });
+}
+
+// Function to check if a number is prime
+function checkPrime(number) {
+    if (number <= 1) {
+        return false; // Numbers less than or equal to 1 are not prime
+    }
+
+// Iterate from 2 up to n - 1 to check for divisors
+for (let i = 2; i < number; i++) {
+    if (number % i === 0) {
+        return false; // If the number is divisible by any number, it's not prime
     }
 }
 
-function filterPrimeNumbers(array) {
-    return array.filter(primenumber);
+return true; // If no divisor is found, the number is prime
 }
 
-const inputArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-console.log(filterPrimeNumbers(inputArray));
+// Function to filter prime numbers from an array of numbers
+function filterPrimeNumbers(numbers) {
+    // Filter only prime numbers
+    return numbers.filter(number => checkPrime(number));
+}
+
+// Call function to filter prime numbers
+filterPrimes();
+
