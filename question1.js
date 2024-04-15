@@ -1,6 +1,16 @@
+const readline = require('readline');
 
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
-// Prompt the user to input a sring
+// Prompt the user to input a string
+rl.question('Enter a string: ', (inputString) => {
+    // Output the result based on the word
+    console.log(switch_case(inputString));
+    rl.close();
+});
 
 // Function to switch the case of each character in a string
 function switch_case(inputString) {
@@ -17,7 +27,3 @@ function switch_case(inputString) {
     }
     return switchedString;
 }
-let word = 'The Quick Brown Fox'
-
-// Output the result based on the word
-console.log(switch_case(word));
